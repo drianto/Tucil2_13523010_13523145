@@ -1,11 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-
-struct Pixel {
-    int r, g, b;
-    Pixel(int R, int G, int B) : r(R), g(G), b(B) {}
-};
+#include "../pixel.h"
 
 int count(const std::vector<Pixel>& blok, char channel, int p){
     int hasil = 0;
@@ -56,17 +52,4 @@ double entropyB(const std::vector<Pixel>& blok){
 
 double entropyError(const std::vector<Pixel>& blok) {
     return (entropyR(blok) + entropyG(blok) + entropyB(blok))/3;
-}
-
-//Testing
-int main() {
-    std::vector<Pixel> block;
-	block.push_back(Pixel(255, 0, 0));
-	block.push_back(Pixel(254, 1, 0));
-	block.push_back(Pixel(253, 2, 0));
-	block.push_back(Pixel(253, 2, 100));
-    block.push_back(Pixel(253, 2, 100));
-	double error = entropyError(block);
-    std::cout << "Error dalam blok: " << error << std::endl;
-    return 0;
 }

@@ -1,11 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-
-struct Pixel {
-    int r, g, b;
-    Pixel(int R, int G, int B) : r(R), g(G), b(B) {}
-};
+#include "../pixel.h"
 
 double mpdError(const std::vector<Pixel>& blok) {
     double maksR;

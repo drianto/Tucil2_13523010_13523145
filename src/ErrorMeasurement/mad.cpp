@@ -1,11 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-
-struct Pixel {
-    int r, g, b;
-    Pixel(int R, int G, int B) : r(R), g(G), b(B) {}
-};
+#include "../pixel.h"
 
 double rataRata(const std::vector<Pixel>& blok, char channel) {
     double sum = 0;
@@ -18,7 +14,7 @@ double rataRata(const std::vector<Pixel>& blok, char channel) {
     return sum / blok.size();
 }
 
-double varians(const std::vector<Pixel>& blok, char channel, double mean) {
+double difference(const std::vector<Pixel>& blok, char channel, double mean) {
     double sum = 0;
     for (int i = 0; i < blok.size(); i++) {
         const Pixel& pixel = blok[i];
@@ -35,25 +31,25 @@ double varians(const std::vector<Pixel>& blok, char channel, double mean) {
     return sum / blok.size();
 }
 
-double varianceError(const std::vector<Pixel>& blok) {
+double madError(const std::vector<Pixel>& blok) {
     double meanR = rataRata(blok, 'r');
     double meanG = rataRata(blok, 'g');
     double meanB = rataRata(blok, 'b');
-    double varR = varians(blok, 'r', meanR);
-    double varG = varians(blok, 'g', meanG);
-    double varB = varians(blok, 'b', meanB);
+    double varR = difference(blok, 'r', meanR);
+    double varG = difference(blok, 'g', meanG);
+    double varB = difference(blok, 'b', meanB);
     double error = (varR + varG + varB) / 3;
     return error;
 }
 /*
-#Testing
+//Testing
 int main() {
     std::vector<Pixel> block;
 	block.push_back(Pixel(255, 0, 0));
 	block.push_back(Pixel(254, 1, 0));
 	block.push_back(Pixel(253, 2, 0));
 	block.push_back(Pixel(253, 2, 100));
-    double error = varianceError(block);
+    double error = madError(block);
     std::cout << "Error dalam blok: " << error << std::endl;
     return 0;
 }
