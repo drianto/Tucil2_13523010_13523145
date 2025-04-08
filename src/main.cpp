@@ -7,6 +7,9 @@
 
 int main() {
     std::cout << "Masukan alamat gambar yang ingin dikompresi: " << std::endl;
+    input();
+    checkInput();
+
     std::cout << "Masukan nomor metode perhitungan error: " << std::endl;
     std::cout << "1. Variance" << std::endl;
     std::cout << "2. Mean Absolute Deviation (MAD)" << std::endl;
