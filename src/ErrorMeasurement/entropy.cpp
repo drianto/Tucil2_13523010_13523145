@@ -3,13 +3,13 @@
 #include <cmath>
 #include "../pixel.hpp"
 
-int count(const std::vector<Pixel>& blok, char channel, int p){
+int count(const std::vector<Pixel>& blok, char color, int p){
     int hasil = 0;
     for (int i = 0; i < blok.size(); i++) {
         const Pixel& pixel = blok[i];
-        if (channel == 'r' && pixel.r == p) hasil++;
-        else if (channel == 'g' && pixel.g == p) hasil++;
-        else if (channel == 'b' && pixel.b == p) hasil++;
+        if (color == 'r' && pixel.r == p) hasil++;
+        else if (color == 'g' && pixel.g == p) hasil++;
+        else if (color == 'b' && pixel.b == p) hasil++;
     }
     return hasil;
 }

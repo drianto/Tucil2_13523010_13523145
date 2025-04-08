@@ -3,28 +3,28 @@
 #include <cmath>
 #include "../pixel.hpp"
 
-double rataRata(const std::vector<Pixel>& blok, char channel) {
+double rataRata(const std::vector<Pixel>& blok, char color) {
     double sum = 0;
     for (int i = 0; i < blok.size(); i++) {
         const Pixel& pixel = blok[i];
-        if (channel == 'r') sum += pixel.r;
-        else if (channel == 'g') sum += pixel.g;
-        else if (channel == 'b') sum += pixel.b;
+        if (color == 'r') sum += pixel.r;
+        else if (color == 'g') sum += pixel.g;
+        else if (color == 'b') sum += pixel.b;
     }
     return sum / blok.size();
 }
 
-double varians(const std::vector<Pixel>& blok, char channel, double mean) {
+double varians(const std::vector<Pixel>& blok, char color, double mean) {
     double sum = 0;
     for (int i = 0; i < blok.size(); i++) {
         const Pixel& pixel = blok[i];
-		if (channel == 'r'){
+		if (color == 'r'){
             sum += (pixel.r - mean) * (pixel.r - mean);
         }
-        else if (channel == 'g'){
+        else if (color == 'g'){
             sum += (pixel.g - mean) * (pixel.g - mean);
         }
-        else if (channel == 'b'){
+        else if (color == 'b'){
             sum += (pixel.b - mean) * (pixel.b - mean);
         }
     }
