@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "../pixel.h"
+#include "../pixel.hpp"
 
 double rataRata(const std::vector<Pixel>& blok, char channel) {
     double sum = 0;
