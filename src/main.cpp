@@ -1,14 +1,15 @@
 #include <iostream>
-#include "inputhandling.cpp"
 #include "ErrorMeasurement/variance.cpp"
 #include "ErrorMeasurement/mad.cpp"
 #include "ErrorMeasurement/mpd.cpp"
 #include "ErrorMeasurement/entropy.cpp"
+#include "image.cpp"
 
 int main() {
     std::cout << "Masukan alamat gambar yang ingin dikompresi: " << std::endl;
     input();
     checkInput();
+    imageToRGB();
 
     std::cout << "Masukan nomor metode perhitungan error: " << std::endl;
     std::cout << "1. Variance" << std::endl;
