@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "../pixel.h"
+#include "../pixel.hpp"
 
 int count(const std::vector<Pixel>& blok, char channel, int p){
     int hasil = 0;
