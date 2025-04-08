@@ -5,7 +5,7 @@
 std::string filePath;
 bool isImageFormat(const std::string directory);
 
-void input() {
+void inputFile() {
     std::getline(std::cin, filePath);
 }
 
