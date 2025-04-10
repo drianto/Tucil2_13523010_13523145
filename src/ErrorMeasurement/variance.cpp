@@ -41,17 +41,3 @@ double varianceError(const std::vector<Pixel>& blok) {
     double error = (varR + varG + varB) / 3;
     return error;
 }
-
-/*
-//Testing
-int main() {
-    std::vector<Pixel> block;
-	block.push_back(Pixel(255, 0, 0));
-	block.push_back(Pixel(254, 1, 0));
-	block.push_back(Pixel(253, 2, 0));
-	block.push_back(Pixel(253, 2, 100));
-    double error = varianceError(block);
-    std::cout << "Error dalam blok: " << error << std::endl;
-    return 0;
-}
-*/

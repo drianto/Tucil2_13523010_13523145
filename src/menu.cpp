@@ -1,7 +1,7 @@
 #include <iostream>
 
 int choiceMeasurement;
-int choiceThreshold;
+double choiceThreshold;
 int choiceBlockMinimum;
 
 void inputMeasurement() {

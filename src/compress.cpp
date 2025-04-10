@@ -21,14 +21,28 @@ Pixel averageColor(const std::vector<Pixel>& blok){
     return Pixel(rataRata(blok,'r'), rataRata(blok,'g'), rataRata(blok,'b'));
 }
 
-void normalize(const std::vector<Pixel>& blok) {
+void normalize(std::vector<Pixel>& blok) {
     Pixel avg = averageColor(blok);
     for (int i = 0; i < blok.size(); i++) {
-        blok[i] = Pixel;
+        blok[i] = avg;
     }
 }
 
-void split(const std::vector<Pixel>& blok, int width, int height) {
+void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurement, double treshold, int minSize) {
+    double errorValue;
+    if(errorMeasurement == 1){
+        errorValue = varianceError(blok);
+    }else if(errorMeasurement == 2){
+        errorValue = madError(blok);
+    }else if(errorMeasurement == 3){
+        errorValue = mpdError(blok);
+    }else if(errorMeasurement == 4){
+        errorValue = entropyError(blok);
+    }
+    if(errorValue <= treshold || width * height / 4 < minSize){
+        normalize(blok);
+        return;
+    }
     int midX = width / 2;
     int midY = height / 2;
     std::vector<Pixel> q1;
@@ -52,8 +66,24 @@ void split(const std::vector<Pixel>& blok, int width, int height) {
             }
         }
     }
-    /*
-    CEK SETIAP KUADRAN UDH MEMENUHI SYARAT ATAU BELUM
-    KALO BELUM TAMBAHIN REKURSI
-    */
+    quadtree(q1, midX, midY, errorMeasurement, treshold, minSize);
+    quadtree(q2, midX, midY, errorMeasurement, treshold, minSize);
+    quadtree(q3, midX, midY, errorMeasurement, treshold, minSize);
+    quadtree(q4, midX, midY, errorMeasurement, treshold, minSize);
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            int index = y * width + x;
+            if (y < midY) {
+                if (x < midX)
+                    blok[index] = q1[y * midX + x];
+                else
+                    blok[index] = q2[y * midX + (x - midX)];
+            } else {
+                if (x < midX)
+                    blok[index] = q3[(y - midY) * midX + x];
+                else
+                    blok[index] = q4[(y - midY) * midX + (x - midX)];
+            }
+        }
+    }
 }
