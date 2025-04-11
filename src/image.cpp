@@ -3,14 +3,20 @@
 #include <vector>
 #include <tuple>
 #include "inputhandling.cpp"
+#include "pixel.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.hpp"
+
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.hpp"
 
+std::vector<Pixel> blok;
+int width;
+int height;
+
 void imageToRGB(std::string& filePath) {
-    int width, height, channels;
+    int channels;
 
     unsigned char* image = stbi_load(filePath.c_str(), &width, &height, &channels, 3);
 
@@ -19,18 +25,19 @@ void imageToRGB(std::string& filePath) {
         return;
     }
 
-    std::vector<std::vector<std::tuple<int, int, int>>> rgbMatrix(height, std::vector<std::tuple<int, int, int>>(width));
+    blok.clear(); 
+    blok.reserve(width * height);
 
-    for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
             int idx = (y * width + x) * 3;
             int r = image[idx];
             int g = image[idx + 1];
             int b = image[idx + 2];
-    
-            rgbMatrix[y][x] = std::make_tuple(r, g, b);
+
+            blok.push_back(Pixel(r, g, b));
         }
-    }    
+    }
 
     stbi_image_free(image);
 }

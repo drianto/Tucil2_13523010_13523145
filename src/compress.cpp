@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
+#include "pixel.hpp"
+#include "calculation.hpp"
 #include "ErrorMeasurement/variance.cpp"
 #include "ErrorMeasurement/mad.cpp"
 #include "ErrorMeasurement/mpd.cpp"
 #include "ErrorMeasurement/entropy.cpp"
-#include "pixel.hpp"
 
 double rataRata(const std::vector<Pixel>& blok, char channel) {
     double sum = 0;
