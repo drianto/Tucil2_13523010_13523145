@@ -38,6 +38,8 @@ int main() {
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     std::cout << "Waktu eksekusi: " << duration.count() << "ms" << std::endl;
+    std::cout << "Jumlah simpul: " << simpul << std::endl;
+    std::cout << "Kedalaman pohon: " << maxDepth << std::endl;
 
     return 0;
 }
