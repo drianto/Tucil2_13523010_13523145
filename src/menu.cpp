@@ -28,8 +28,34 @@ void inputMeasurement() {
 }
 
 void inputThreshold() {
-    std::cout << "Masukan ambang batas: ";
-    std::cin >> choiceThreshold;
+    std::cout << "Tentukan ambang batas" << std::endl;
+
+    double minThreshold = 0;
+    double maxThreshold = 0;
+
+    if (choiceMeasurement == 1) {
+        std::cout << "Ambang batas berada pada rentang 0 - 100" << std::endl ;
+        maxThreshold = 100;
+    } else if (choiceMeasurement == 2) {
+        std::cout << "Ambang batas berada pada rentang 0 - 25" << std::endl;
+        maxThreshold = 25;
+    } else if (choiceMeasurement == 3) {
+        std::cout << "Ambang batas berada pada rentang 0 - 50" << std::endl;
+        maxThreshold = 50;
+    } else if (choiceMeasurement == 4) {
+        std::cout << "Ambang batas berada pada rentang 0 - 2" << std::endl;
+        maxThreshold = 2;
+    }
+
+    do {
+        std::cout << "Masukan ambang batas: ";
+        std::cin >> choiceThreshold;
+
+        if (choiceThreshold < minThreshold || choiceThreshold > maxThreshold) {
+            std::cout << "Ambang batas tidak valid. Silakan coba lagi." << std::endl;
+        }
+    } while (choiceThreshold < minThreshold || choiceThreshold > maxThreshold);
+
     std::cout << std::endl;
 }
 
