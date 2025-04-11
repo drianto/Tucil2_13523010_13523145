@@ -29,11 +29,7 @@ int main() {
     quadtree(blok, width, height, choiceMeasurement, choiceThreshold, choiceBlockMinimum, simpul, 0, maxDepth);
     auto end = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Masukan alamat gambar hasil kompresi: " << std::endl;
-
-    std::cin.ignore();
-    std::string outputPath;
-    std::getline(std::cin, outputPath);
+    std::string outputPath = checkOutput();
     RGBToImage(blok, outputPath, height, width);
     uintmax_t outputSize = getFileSize(outputPath);
 

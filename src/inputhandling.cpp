@@ -31,3 +31,20 @@ bool isImageFormat(const std::string directory) {
 
     return format == ".jpg" || format == ".png" || format == ".jpeg";
 }
+
+std::string checkOutput() {
+    std::string outputPath;
+    while (true) {
+        std::cout << "Masukan alamat gambar hasil kompresi: " << std::endl;
+        std::cin.ignore();
+        std::getline(std::cin, outputPath);
+
+        std::filesystem::path folderPath = std::filesystem::path(outputPath).parent_path();
+
+        if (std::filesystem::exists(folderPath)) {
+            return outputPath;
+        } else {
+            std::cout << "Folder tidak ditemukan. Pastikan folder sudah ada." << std::endl << std::endl;
+        }
+    }
+}
