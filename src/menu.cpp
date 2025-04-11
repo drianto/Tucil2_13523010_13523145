@@ -2,7 +2,7 @@
 
 int choiceMeasurement;
 double choiceThreshold;
-int choiceBlockMinimum;
+double choiceBlockMinimum;
 
 void inputMeasurement() {
     std::cout << "Pilih metode perhitungan error" << std::endl;

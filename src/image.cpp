@@ -53,7 +53,7 @@ void RGBToImage(std::vector<Pixel>& blok, std::string& outputPath, int height, i
             imageData[idx + 2] = static_cast<unsigned char>(pixel.b);
         }
     }
-    if (stbi_write_jpg(outputPath.c_str(), width, height, 3, imageData.data(), 100)) {
+    if (stbi_write_jpg(outputPath.c_str(), width, height, 3, imageData.data(), 90)) {
         std::cout << "Gambar berhasil disimpan ke: " << outputPath << std::endl;
     } else {
         std::cerr << "Gagal menyimpan gambar." << std::endl;

@@ -18,8 +18,8 @@ double rataRata(const std::vector<Pixel>& blok, char channel) {
     return sum / blok.size();
 }
 
-Pixel averageColor(const std::vector<Pixel>& blok){
-    return Pixel(rataRata(blok,'r'), rataRata(blok,'g'), rataRata(blok,'b'));
+Pixel averageColor(const std::vector<Pixel>& blok) {
+    return Pixel(rataRata(blok, 'r'), rataRata(blok, 'g'), rataRata(blok, 'b'));
 }
 
 void normalize(std::vector<Pixel>& blok) {
@@ -29,27 +29,31 @@ void normalize(std::vector<Pixel>& blok) {
     }
 }
 
-void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurement, double threshold, int minSize) {
+void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurement, double threshold, double minSize) {
     double errorValue;
-    if(errorMeasurement == 1){
+    if (errorMeasurement == 1) {
         errorValue = varianceError(blok);
-    }else if(errorMeasurement == 2){
+    } else if (errorMeasurement == 2) {
         errorValue = madError(blok);
-    }else if(errorMeasurement == 3){
+    } else if (errorMeasurement == 3) {
         errorValue = mpdError(blok);
-    }else if(errorMeasurement == 4){
+    } else if (errorMeasurement == 4) {
         errorValue = entropyError(blok);
     }
-    if(errorValue <= threshold || width * height / 4 < minSize){
+
+    if (errorValue <= threshold || width * height / 4 < minSize) {
         normalize(blok);
         return;
     }
+
+    bool widthEven = (width % 2 == 0);
+    bool heightEven = (height % 2 == 0);
     int midX = width / 2;
     int midY = height / 2;
-    std::vector<Pixel> q1;
-    std::vector<Pixel> q2;
-    std::vector<Pixel> q3;
-    std::vector<Pixel> q4;
+    int rightWidth = widthEven ? midX : midX + 1;
+    int bottomHeight = heightEven ? midY : midY + 1;
+
+    std::vector<Pixel> q1, q2, q3, q4;
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -67,10 +71,12 @@ void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurem
             }
         }
     }
+
     quadtree(q1, midX, midY, errorMeasurement, threshold, minSize);
-    quadtree(q2, midX, midY, errorMeasurement, threshold, minSize);
-    quadtree(q3, midX, midY, errorMeasurement, threshold, minSize);
-    quadtree(q4, midX, midY, errorMeasurement, threshold, minSize);
+    quadtree(q2, rightWidth, midY, errorMeasurement, threshold, minSize);
+    quadtree(q3, midX, bottomHeight, errorMeasurement, threshold, minSize);
+    quadtree(q4, rightWidth, bottomHeight, errorMeasurement, threshold, minSize);
+
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             int index = y * width + x;
@@ -78,12 +84,12 @@ void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurem
                 if (x < midX)
                     blok[index] = q1[y * midX + x];
                 else
-                    blok[index] = q2[y * midX + (x - midX)];
+                    blok[index] = q2[y * rightWidth + (x - midX)];
             } else {
                 if (x < midX)
                     blok[index] = q3[(y - midY) * midX + x];
                 else
-                    blok[index] = q4[(y - midY) * midX + (x - midX)];
+                    blok[index] = q4[(y - midY) * rightWidth + (x - midX)];
             }
         }
     }
