@@ -13,7 +13,7 @@ int main() {
     inputFile();
     checkInput();
     imageToRGB(filePath);
-
+    uintmax_t inputSize = getFileSize(filePath);
     // Pilih Error Measurement
     inputMeasurement();
 
@@ -35,11 +35,14 @@ int main() {
     std::string outputPath;
     std::getline(std::cin, outputPath);
     RGBToImage(blok, outputPath, height, width);
+    uintmax_t outputSize = getFileSize(outputPath);
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     std::cout << "Waktu eksekusi: " << duration.count() << "ms" << std::endl;
+    std::cout << "Ukuran file awal: " << inputSize/1024 << "kb" << std::endl;
+    std::cout << "Ukuran file akhir: " << outputSize/1024 << "kb" << std::endl;
+    std::cout << "Besar kompresi: " << (inputSize - outputSize) * 100 / inputSize << "%" << std::endl;
     std::cout << "Jumlah simpul: " << simpul << std::endl;
     std::cout << "Kedalaman pohon: " << maxDepth << std::endl;
-
     return 0;
 }

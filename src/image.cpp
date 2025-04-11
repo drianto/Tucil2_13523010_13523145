@@ -15,6 +15,10 @@ std::vector<Pixel> blok;
 int width;
 int height;
 
+uintmax_t getFileSize(const std::string& filePath) {
+    return std::filesystem::file_size(filePath);
+}
+
 void imageToRGB(std::string& filePath) {
     int channels;
 
