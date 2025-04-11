@@ -5,24 +5,35 @@ double choiceThreshold;
 double choiceBlockMinimum;
 
 void inputMeasurement() {
-    std::cout << "Pilih metode perhitungan error" << std::endl;
-    std::cout << "1. Variance" << std::endl;
-    std::cout << "2. Mean Absolute Deviation (MAD)" << std::endl;
-    std::cout << "3. Max Pixel Difference" << std::endl;
-    std::cout << "4. Entropy" << std::endl;
-    std::cout << "Masukan nomor: ";
-    std::cin >> choiceMeasurement;
+    try {
+        std::cout << "Pilih metode perhitungan error" << std::endl;
+        std::cout << "1. Variance" << std::endl;
+        std::cout << "2. Mean Absolute Deviation (MAD)" << std::endl;
+        std::cout << "3. Max Pixel Difference" << std::endl;
+        std::cout << "4. Entropy" << std::endl;
+        std::cout << "Masukan nomor: ";
+        std::cin >> choiceMeasurement;
 
-    if (choiceMeasurement == 1) {
-        std::cout << "Anda memilih Variance" << std::endl << std::endl;
-    } else if (choiceMeasurement == 2) {
-        std::cout << "Anda memilih Mean Absolute Deviation" << std::endl << std::endl; 
-    } else if (choiceMeasurement == 3) {
-        std::cout << "Anda memilih Max Pixel Difference" << std::endl << std::endl;
-    } else if (choiceMeasurement == 4) {
-        std::cout << "Anda memilih Entropy" << std::endl << std::endl << std::endl;
-    } else {
-        std::cout << "\nAngka tersebut tidak ada dalam pilihan, silahkan pilih lagi." << std::endl;
+        if (std::cin.fail()) {
+            throw "Input harus berupa angka";
+        }
+
+        if (choiceMeasurement == 1) {
+            std::cout << "Anda memilih Variance" << std::endl << std::endl;
+        } else if (choiceMeasurement == 2) {
+            std::cout << "Anda memilih Mean Absolute Deviation" << std::endl << std::endl; 
+        } else if (choiceMeasurement == 3) {
+            std::cout << "Anda memilih Max Pixel Difference" << std::endl << std::endl;
+        } else if (choiceMeasurement == 4) {
+            std::cout << "Anda memilih Entropy" << std::endl << std::endl << std::endl;
+        } else {
+            std::cout << "\nAngka tersebut tidak ada dalam pilihan, silahkan pilih lagi." << std::endl;
+            inputMeasurement();
+        }
+    } catch (...) {
+        std::cout << "Input harus berupa angka" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
         inputMeasurement();
     }
 }
@@ -47,14 +58,28 @@ void inputThreshold() {
         maxThreshold = 2;
     }
 
-    do {
-        std::cout << "Masukan ambang batas: ";
-        std::cin >> choiceThreshold;
+    bool valid = false;
 
-        if (choiceThreshold < minThreshold || choiceThreshold > maxThreshold) {
-            std::cout << "Ambang batas tidak valid. Silakan coba lagi." << std::endl;
+    do {
+        try {
+            std::cout << "Masukan ambang batas: ";
+            std::cin >> choiceThreshold;
+
+            if (std::cin.fail()) {
+                throw "Input harus berupa angka";
+            }
+
+            if (choiceThreshold >= minThreshold && choiceThreshold <= maxThreshold) {
+                valid = true;
+            } else {
+                std::cout << "Ambang batas tidak valid. Silakan coba lagi." << std::endl;
+            }
+        } catch (...) {
+            std::cout << "Input harus berpa angka" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
         }
-    } while (choiceThreshold < minThreshold || choiceThreshold > maxThreshold);
+    } while (!valid);
 
     std::cout << std::endl;
 }
