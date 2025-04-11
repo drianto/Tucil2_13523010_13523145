@@ -10,12 +10,18 @@ void inputFile() {
 }
 
 void checkInput() {
-    if (std::filesystem::exists(filePath) && isImageFormat(filePath)) {
-        std::cout << "File ditemukan" << std::endl << std::endl;
-    } else if (std::filesystem::exists(filePath) && !isImageFormat(filePath)) {
-        std::cout << "File bukan merupakan format gambar" << std::endl << std::endl;
-    } else {
-        std::cout << "File tidak ditemukan" << std::endl << std::endl;
+    while (true) {
+        if (std::filesystem::exists(filePath) && isImageFormat(filePath)) {
+            std::cout << "File ditemukan" << std::endl << std::endl;
+            break;
+        } else if (std::filesystem::exists(filePath) && !isImageFormat(filePath)) {
+            std::cout << "File bukan merupakan format gambar (.jpg, .png, .jpeg)" << std::endl;
+        } else {
+            std::cout << "File tidak ditemukan" << std::endl << std::endl;
+        }
+
+        std::cout << "Masukan alamat gambar yang ingin dikompresi: " << std::endl;
+        std::getline(std::cin, filePath); 
     }
 }
 
@@ -23,5 +29,5 @@ bool isImageFormat(const std::string directory) {
     std::filesystem::path filePath(directory);
     std::string format = filePath.extension().string();
 
-    return format == ".jpg" || format == ".png" || format == ".bmp" || format == ".jpeg";
+    return format == ".jpg" || format == ".png" || format == ".jpeg";
 }
