@@ -21,8 +21,9 @@ int main() {
 
     // Pilih ukuran blok minimum
     inputBlockMinimum();
-
-    quadtree(blok, width, height, choiceMeasurement, choiceThreshold, choiceBlockMinimum);
+    int simpul=0;
+    int maxDepth=0;
+    quadtree(blok, width, height, choiceMeasurement, choiceThreshold, choiceBlockMinimum, simpul, 0, maxDepth);
 
     std::cout << "Masukan alamat gambar hasil kompresi: " << std::endl;
 

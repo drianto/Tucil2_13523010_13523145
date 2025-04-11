@@ -29,7 +29,12 @@ void normalize(std::vector<Pixel>& blok) {
     }
 }
 
-void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurement, double threshold, double minSize) {
+void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurement, double threshold, double minSize, int &simpul, int depth, int &maxDepth) {
+    simpul++;
+    if (depth > maxDepth) {
+        maxDepth = depth;
+    }
+
     double errorValue;
     if (errorMeasurement == 1) {
         errorValue = varianceError(blok);
@@ -40,7 +45,7 @@ void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurem
     } else if (errorMeasurement == 4) {
         errorValue = entropyError(blok);
     }
-
+    
     if (errorValue <= threshold || width * height / 4 < minSize) {
         normalize(blok);
         return;
@@ -72,10 +77,10 @@ void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurem
         }
     }
 
-    quadtree(q1, midX, midY, errorMeasurement, threshold, minSize);
-    quadtree(q2, rightWidth, midY, errorMeasurement, threshold, minSize);
-    quadtree(q3, midX, bottomHeight, errorMeasurement, threshold, minSize);
-    quadtree(q4, rightWidth, bottomHeight, errorMeasurement, threshold, minSize);
+    quadtree(q1, midX, midY, errorMeasurement, threshold, minSize, simpul, depth + 1, maxDepth);
+    quadtree(q2, rightWidth, midY, errorMeasurement, threshold, minSize, simpul, depth + 1, maxDepth);
+    quadtree(q3, midX, bottomHeight, errorMeasurement, threshold, minSize, simpul, depth + 1, maxDepth);
+    quadtree(q4, rightWidth, bottomHeight, errorMeasurement, threshold, minSize, simpul, depth + 1, maxDepth);
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -94,3 +99,4 @@ void quadtree(std::vector<Pixel>& blok, int width, int height, int errorMeasurem
         }
     }
 }
+
