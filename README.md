@@ -16,7 +16,7 @@ Program pemrosesan gambar menjadi blok-blok kecil menggunakan Quadtree dengan st
    ```
     g++ -std=c++17 src/main.cpp src/pixel.cpp -o bin/main
    ```
-   Sesuaikan versi compiler c++ dengan yang ada pada perangkat Anda (minimal c++17)
+   Sesuaikan versi compiler c++ dengan yang ada pada perangkat Anda (minimal c++17)  
    Pada beberapa kasus versi di bawah c++17 bisa meng-compile asalkan input untuk mengcompile di terminal minimal menggunakan c++17
    
 ## Cara menjalankan dan menggunakan program
