@@ -32,5 +32,5 @@ Program pemrosesan gambar menjadi blok-blok kecil menggunakan Quadtree dengan st
 Pastikan tetap berada di direktori utama repositori untuk menjalankan program
 
 ## Author
-Qodri Azkarayan	- 13523010
+Qodri Azkarayan	- 13523010  
 Andri Nurdianto	- 13523145
