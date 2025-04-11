@@ -2,17 +2,18 @@
 #include <vector>
 #include <cmath>
 #include "../pixel.hpp"
+#include "../calculation.hpp"
 
-double rataRata(const std::vector<Pixel>& blok, char color) {
-    double sum = 0;
-    for (int i = 0; i < blok.size(); i++) {
-        const Pixel& pixel = blok[i];
-        if (color == 'r') sum += pixel.r;
-        else if (color == 'g') sum += pixel.g;
-        else if (color == 'b') sum += pixel.b;
-    }
-    return sum / blok.size();
-}
+// double rataRata(const std::vector<Pixel>& blok, char color) {
+//     double sum = 0;
+//     for (int i = 0; i < blok.size(); i++) {
+//         const Pixel& pixel = blok[i];
+//         if (color == 'r') sum += pixel.r;
+//         else if (color == 'g') sum += pixel.g;
+//         else if (color == 'b') sum += pixel.b;
+//     }
+//     return sum / blok.size();
+// }
 
 double difference(const std::vector<Pixel>& blok, char color, double mean) {
     double sum = 0;

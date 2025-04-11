@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "../pixel.hpp"
+#include "../calculation.hpp"
 
 int count(const std::vector<Pixel>& blok, char color, int p){
     int hasil = 0;

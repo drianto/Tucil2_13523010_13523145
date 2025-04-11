@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "../pixel.hpp"
+#include "../calculation.hpp"
 
 double mpdError(const std::vector<Pixel>& blok) {
     double maksR;
