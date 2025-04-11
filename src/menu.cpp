@@ -54,8 +54,8 @@ void inputThreshold() {
         std::cout << "Ambang batas berada pada rentang 0 - 50" << std::endl;
         maxThreshold = 50;
     } else if (choiceMeasurement == 4) {
-        std::cout << "Ambang batas berada pada rentang 0 - 2" << std::endl;
-        maxThreshold = 2;
+        std::cout << "Ambang batas berada pada rentang 0 - 10" << std::endl;
+        maxThreshold = 10;
     }
 
     bool valid = false;
