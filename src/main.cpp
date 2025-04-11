@@ -22,8 +22,7 @@ int main() {
     // Pilih ukuran blok minimum
     inputBlockMinimum();
 
-    // Hanya untuk mengetes, belum memasukkan input dari pengguna
-    quadtree(blok, width, height, 1, 1000, 3000);
+    quadtree(blok, width, height, choiceMeasurement, choiceThreshold, choiceBlockMinimum);
 
     std::cout << "Masukan alamat gambar hasil kompresi: " << std::endl;
 
